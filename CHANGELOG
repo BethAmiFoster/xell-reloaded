@@ -1,3 +1,6 @@
+V0.994 - 28/07/2021
+XeLL now builds with GCC 9
+
 v0.993 - 28/08/2013
 Disabled USB writes for the logfile (not working with EXT# anyways
 Fixed the crashing when unplugging USB memories at runtime

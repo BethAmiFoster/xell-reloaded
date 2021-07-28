@@ -20,5 +20,3 @@ static char* asciiart = "\n"
 	"  €€   €€    ﬂ€‹€ﬂ   €€       ﬂ€‹‹€ﬂ   €€   €€  €€ ‹€ﬂ    ﬂ€‹€ﬂ   €€ ‹€ﬂ\n"
 	"  ﬂﬂ   ﬂﬂ      ﬂ     ﬂﬂﬂﬂﬂﬂﬂ    ﬂﬂ     ﬂﬂ   ﬂﬂ   ﬂﬂﬂ        ﬂ      ﬂﬂﬂ\n"
 	"             Free60.org XeLL - Xenon Linux Loader " VERSION "\n";
-static char* asciitail =
-	"                 Special Corona Compatible XeLL version\n\n";

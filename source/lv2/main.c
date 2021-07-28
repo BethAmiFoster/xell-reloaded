@@ -40,7 +40,6 @@ void do_asciiart()
 	char *p = asciiart;
 	while (*p)
 		console_putch(*p++);
-	printf(asciitail);
 }
 
 void dumpana() {

@@ -1,12 +1,12 @@
-XeLL-Reloaded
+# **XeLL-Reloaded**
 
-A Xenon Linux loader based on Xell by tmbinc(Felix Domke)
+A Xenon Linux loader based on Xell by tmbinc (Felix Domke)
 
-XeLL-Reloaded catches CPU threads, sets them up, loads an ELF file from either network (tftp), USB(fat/ext2fs), CDROM (ISO9660) or HDD(fat/ext2fs/xtaf), and launches it. 
+XeLL-Reloaded catches CPU threads, sets them up, loads an ELF file from either network (tftp), USB(fat/ext2fs), CDROM (ISO9660) or HDD(fat/ext2fs/fatx), and launches it. 
 It's made to boot Linux, so it contains a flat device tree for Linux. However, it is able to load other ELF files as well, like applications based on LibXenon.
 
-* Now based on LibXenon
-* Supports the new Reset Glitch Hack - RGH. (xell-gggggg)
+*  based on LibXenon
+* Supports Reset Glitch Hack - RGH. (xell-gggggg)
 * XeLL-Reloaded is now divided in 2 stages:
 	- 1st Stage initializes most of the Hardware, uncompresses and executes 2nd Stage
 	- 2nd Stage (based on LibXenon) loads all required drivers and does the usual "XeLL tasks"
@@ -15,8 +15,8 @@ It's made to boot Linux, so it contains a flat device tree for Linux. However, i
 * All CPU Cores are active and ready to run at full speed.
 * TinyEHCI is used, delivers full USB 2.0 speed when accessing mass storage media
 * lwip network stack upgraded to v1.4 Final - It's faster and DHCP is improved.
-* It can access the DVD-drive via DMA now: faster reading
-* It's possible to reload into XeLL now when you are inside a LibXenon Application
+* It can access the DVD-drive via DMA: faster reading
+* It's possible to reload into XeLL when you are inside a LibXenon Application
 * New HTTP web interface to retrieve nand dump.
 * Improved hardware initialization now allows chain-loading.
 * Supports upgrading with a 2-stage XeLL-Reloaded binary, named "updxell.bin"
@@ -29,64 +29,82 @@ It's made to boot Linux, so it contains a flat device tree for Linux. However, i
 * Shows a user controllable menu for the parsed bootentries 
   xell user prompt - by Georg Lukas "Ge0rg" <georg@op-co.de>
 
-  HOW TO USE
-==============
+# HOW TO USE
+
 
 XeLL Reloaded checks for ELF/UpdXeLL/Kboot-config or updflash.bin in the following order:
 
-USB (FAT/EXT2FS)
+**USB (FAT/EXT2FS)
 DVD(ISO9660)
 HDD(XTAF/FAT/EXT2FS):	updxell.bin
 						kboot.conf
 						xenon.elf
 						xenon.z
 						vmlinux
-						updflash.bin
+						updflash.bin**
 						
-Network: 				updxell.bin
+						
+						
+						
+**Network: 				
+						updxell.bin
 						kboot.conf
 						xenon.elf
 						xenon.z
 						vmlinux
 						updflash.bin (It will find that file, but refuse to flash it!)
-						DHCP supplied bootfile-name
-						* XeLL takes bootserver from DHCP, if supplied. You can supply a static tftpserver ip via kboot.conf. If no tftpserver is found, it falls back to a static ip.
-						* no updflash support via tftp !
+						DHCP supplied bootfile-name**
+						 
+						 
+XeLL takes bootserver from DHCP, if supplied. You can supply a static tftpserver ip via kboot.conf. If no tftpserver is found, it falls back to a static ip.
+
+no updflash support via tftp !
 
 
 updflash.bin is a already remapped flashimage/nandimage. 16MB file for 16MB NAND and 64MB file for 64/256/512MB NAND.
 
-updxell.bin is a renamed xell*.bin file. * Version depending on the used hack (JTAG XeLL: xell-1f (oldies) xell-2f (modern), RGH XeLL: xell-gggggg)
+updxell.bin is a renamed xell.bin file. Version depending on the used hack 
+
+**JTAG XeLL: xell-1f (oldies) xell-2f (modern),
+RGH XeLL: xell-gggggg)**
+
 
 kboot.conf (modified for XeLL) is a configfile
-	General XeLL config: Set TFTP-Server, CPU-Speedup, videomode, NetConfig
-	Menu: Parses bootentries, shows a user controlable menu with XboxController/UART/IR Remote
-	      It can parse bootarguments for linux kernels & can load initramfs/initrd 
+
+General XeLL config: Set TFTP-Server, CPU-Speedup, videomode, NetConfig
+
+Menu: Parses bootentries, shows a user controlable menu with XboxController/UART/IR Remote
+
+  It can parse bootarguments for linux kernels & can load initramfs/initrd 
 
 xenon.elf/xenon.z/vmlinux can be either gzipped or bare ELF32 binaries - LINUX or Homebrew
 
+
+
 There's also a HTTP Server running while XeLL searches for executable binaries.
-It can serve the CPUKey/DVDKey and the console's flashdump.
+It can serve the CPUKey/DVDKey and the console's flashdump.	
 
 
-  UPDATING XELL
-=================
+# UPDATING XeLL
 
-1. Rename the appropriate XeLL-binary to "updxell.bin". 
+
+1. Rename the appropriate XeLL-binary to updxell.bin
 2. Supply the updxell.bin file to XeLL via USB/DVD/HDD or TFTP
 3. It should find the update and flash it
-4. Reboot your Xbox and enjoy the fresh XeLL build
+4. Reboot your Xbox and enjoy the fresh XeLL build. 
 
 Troubleshooting:
 
 updxell.bin doesn't get found / updxell process doesn't start:
+
 --You have to rebuild your whole hackimage with a recent XeLL. From there on you can use the inbuilt update feature
 updxell function reports that no XeLL binary was found in NAND:
+
 --Either your XeLL in NAND is too old or it's not a XeLL Reloaded binary - You have to rebuild your whole hackimage with a recent XeLL.
 
 
-  FLASHING NAND
-=================
+# FLASHING NAND
+
 
 1. Rename the new (already remapped) flashimage to "updflash.bin"
 2. Supply the updflash.bin file to XeLL via USB/DVD/HDD
@@ -95,12 +113,12 @@ updxell function reports that no XeLL binary was found in NAND:
 
 Troubleshooting:
 
-XBox does not boot properly after flashing the NAND:
+Xbox does not boot properly after flashing the NAND:
 --Either your image wasn't properly remapped or you made something wrong while building the image
 
 
-  USING KBOOT.CONF
-===================
+# USING KBOOT.CONF
+
 
 1. Read and understand the kboot.conf.sample which is part of every XeLL release with kboot-support
 2. Modify the file to your needs
@@ -125,7 +143,7 @@ XBox does not boot properly after flashing the NAND:
 
 6. Let the bootentry load. Enjoy :)
 
-Troubleshooting:
+# Troubleshooting:
 
 kboot.conf gets found but it doesn't show bootentries or autoloads a bootentry:
 --Make sure timeout is set to something higher than 0

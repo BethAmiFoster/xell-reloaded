@@ -130,6 +130,7 @@ int main(){
 	xenon_make_it_faster(XENON_SPEED_FULL);
 	if (xenon_get_console_type() != REV_CORONA_PHISON) //Not needed for MMC type of consoles! ;)
 	{
+		printf("\r%s\r");
 		printf(" * nand init\n");
 		sfcx_init();
 		if (sfc.initialized != SFCX_INITIALIZED)

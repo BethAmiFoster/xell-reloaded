@@ -42,6 +42,24 @@ void do_asciiart()
 		console_putch(*p++);
 }
 
+void wait_and_cleanup_line()
+{
+	unsigned int w=0;
+	console_get_dimensions(&w,NULL);
+	
+	char sp[w];
+
+	memset(sp,' ',w);
+	sp[w-1]='\0';
+
+	uint64_t t=mftb();
+	while(tb_diff_msec(mftb(),t)<200){ // yield to network
+		network_poll();
+	}
+	
+	printf("\r%s\r",sp);
+}
+
 void dumpana() {
 	int i;
 	for (i = 0; i < 0x100; ++i)
@@ -129,7 +147,6 @@ int main(){
 	xenon_make_it_faster(XENON_SPEED_FULL);
 	if (xenon_get_console_type() != REV_CORONA_PHISON) //Not needed for MMC type of consoles! ;)
 	{
-		printf("\r%s\r",sp);
 		printf(" * nand init\n");
 		sfcx_init();
 		if (sfc.initialized != SFCX_INITIALIZED)
